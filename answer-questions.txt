@@ -1,0 +1,11 @@
+1 - Using create-react-app, what do we need to set up for testing?
+    We only need to set up the react-testing-library Jest with npm install
+
+2 - What components are worth to test in your development?
+    Currently the only components that are worth to test in the current development are the search bar
+
+3 - Can you apply TDD once you already created components?
+    You can apply TDD creating the tests first and making them fail. Then create the components to make the tests pass and the last step is to refactor the
+    necessary code.
+    If you create the component first it might not cover all the possible scenarios because the component could miss some test cases.
+    In any case you can create the component first and then apply TDD but it is preferable to do it the other way.
