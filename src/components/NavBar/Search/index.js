@@ -1,1 +1,1 @@
-export { default } from './Serach.component';
+export { default } from './Search.component';

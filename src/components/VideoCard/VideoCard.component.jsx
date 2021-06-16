@@ -5,9 +5,9 @@ import { Avatar, CardContent } from '@material-ui/core';
 import moment from 'moment';
 import { CardImg, CardTitle, StyledCard, StyledCardHeader } from './VideoCard.styled';
 
-function VideoCard({ img, title, description, channel, publishedAt }) {
+function VideoCard({ id, img, title, description, channel, publishedAt }) {
   return (
-    <StyledCard>
+    <StyledCard key={id}>
       <CardImg image={img} />
       <CardContent>
         <CardTitle>{title}</CardTitle>

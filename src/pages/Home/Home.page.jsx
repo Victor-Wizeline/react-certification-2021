@@ -16,6 +16,7 @@ function HomePage() {
         if (id && id.videoId)
           return (
             <VideoCard
+              id={id.videoId}
               img={img}
               title={title}
               description={description}
