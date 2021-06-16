@@ -7,7 +7,7 @@ import { CardImg, CardTitle, StyledCard, StyledCardHeader } from './VideoCard.st
 
 function VideoCard({ id, img, title, description, channel, publishedAt }) {
   return (
-    <StyledCard key={id}>
+    <StyledCard key={id} role="listitem">
       <CardImg image={img} />
       <CardContent>
         <CardTitle>{title}</CardTitle>
