@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const API_KEY = process.env.REACT_APP_YOUTUBE_API;
 const MAX_RESULTS = 25;
@@ -8,17 +8,23 @@ const useYoutubeAPI = (searchTerm) => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  console.log(searchTerm);
-  useEffect(() => {
+
+  const fetchData = useCallback(async () => {
     setLoading(true);
-    fetch(request)
-      .then((res) => res.json())
-      .then(setVideos)
-      .catch(setError)
-      .finally(() => {
-        setLoading(false);
-      });
+    try {
+      const res = await fetch(request);
+      setVideos(await res.json());
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      setError(true);
+      setLoading(false);
+    }
   }, [request]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData, request]);
 
   return [loading, videos, error];
 };
