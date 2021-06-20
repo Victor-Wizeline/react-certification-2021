@@ -11,7 +11,7 @@ import {
 } from './NavBar.styled';
 import Search from './Search/Search.component';
 
-const NavBar = () => {
+const NavBar = ({ handleSearchChange }) => {
   const [open, setOpen] = useState(false);
   const [lightMode, setLightMode] = useState(false);
 
@@ -35,7 +35,7 @@ const NavBar = () => {
       >
         <MenuIcon />
       </IconButton>
-      <Search />
+      <Search handleSearchChange={handleSearchChange} />
       <RightContainer>
         <IconButton onClick={changeTheme} selected={lightMode} aria-label="Change theme">
           {!lightMode ? <LightModeIcon /> : <DarkModeIcon />}
