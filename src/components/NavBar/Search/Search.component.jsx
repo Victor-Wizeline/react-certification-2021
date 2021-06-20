@@ -1,6 +1,8 @@
 import SearchIcon from '@material-ui/icons/Search';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import CancelIcon from '@material-ui/icons/Cancel';
+import { IconButton } from '@material-ui/core';
 import { StyledInput, IconContainer, SearchContainer } from './Search.styled';
 
 const Search = ({ handleSearchChange }) => {
@@ -28,12 +30,25 @@ const Search = ({ handleSearchChange }) => {
         <SearchIcon />
       </IconContainer>
       <StyledInput
+        id="search-cp"
         placeholder="Search…"
         inputProps={{ 'aria-label': 'search' }}
         value={keyWord}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
+      {keyWord && (
+        <IconButton size="small">
+          <CancelIcon
+            fontSize="small"
+            color="error"
+            onClick={() => {
+              setKeyWord('');
+              handleSearchChange('Wizeline');
+            }}
+          />
+        </IconButton>
+      )}
     </SearchContainer>
   );
 };

@@ -9,8 +9,6 @@ import EmptyState from '../../components/VideoCardList/EmptyState';
 function HomePage({ search }) {
   const sectionRef = useRef(null);
   const [loading, videos, error] = useYoutubeAPI(search);
-  console.log(`${loading} ${error}`);
-  console.log(videos);
 
   if (loading) return <LoadingOverlay />;
   if (error && !loading) return <EmptyState />;
