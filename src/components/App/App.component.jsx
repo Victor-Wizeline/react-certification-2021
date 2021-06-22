@@ -10,6 +10,7 @@ import Private from '../Private';
 import Fortune from '../Fortune';
 import Layout from '../Layout';
 import NavBar from '../NavBar';
+import VideoPlayer from '../../pages/VideoPlayer';
 
 function App() {
   const [search, setSearch] = useState('Wizeline');
@@ -29,6 +30,9 @@ function App() {
             </Route>
             <Route exact path="/login">
               <LoginPage />
+            </Route>
+            <Route exact path="/video/:id">
+              <VideoPlayer />
             </Route>
             <Private exact path="/secret">
               <SecretPage />

@@ -44,6 +44,7 @@ const Search = ({ handleSearchChange }) => {
             color="error"
             onClick={() => {
               setKeyWord('');
+              history.push('/');
               handleSearchChange('Wizeline');
             }}
           />

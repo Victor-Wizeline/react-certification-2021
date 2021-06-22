@@ -1,18 +1,17 @@
 import { useEffect, useState, useCallback } from 'react';
 
 const API_KEY = process.env.REACT_APP_YOUTUBE_API;
-const MAX_RESULTS = 25;
 
-const useYoutubeAPI = (searchTerm) => {
-  const request = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${MAX_RESULTS}&q=${searchTerm}&key=${API_KEY}`;
+const useYoutubeAPI = (request) => {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const finalRequest = `${request}&key=${API_KEY}`;
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch(request);
+      const res = await fetch(finalRequest);
       setVideos(await res.json());
       setLoading(false);
     } catch (e) {
@@ -20,7 +19,7 @@ const useYoutubeAPI = (searchTerm) => {
       setError(true);
       setLoading(false);
     }
-  }, [request]);
+  }, [finalRequest]);
 
   useEffect(() => {
     fetchData();

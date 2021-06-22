@@ -8,12 +8,13 @@ const VideoCardList = (props) => {
     let cardVideos = [];
     if (items) {
       cardVideos = items.map((video) => {
-        const { snippet } = video;
+        const { id, snippet } = video;
         const { thumbnails, description, channelTitle, title, publishedAt } = snippet;
         const img = thumbnails && thumbnails.high && thumbnails.high.url;
         return (
           <VideoCard
             key={video.etag}
+            id={id.videoId}
             img={img}
             title={title}
             description={description}
