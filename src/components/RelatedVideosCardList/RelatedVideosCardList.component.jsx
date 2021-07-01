@@ -1,10 +1,10 @@
 import React from 'react';
 import RelatedVideoCard from './RelatedVideoCard';
 
-const RelatedVideosCardList = ({ related }) => {
+const RelatedVideosCardList = ({ relatedVideos }) => {
   const displayRelatedVideos = (rvideos) => {
     let cardVideos = [];
-    if (related) {
+    if (rvideos) {
       cardVideos = rvideos?.items
         ?.filter((e) => e.snippet)
         .map(({ id, snippet }) => {
@@ -22,7 +22,7 @@ const RelatedVideosCardList = ({ related }) => {
     return cardVideos;
   };
 
-  return <div>{displayRelatedVideos(related)}</div>;
+  return <div>{displayRelatedVideos(relatedVideos)}</div>;
 };
 
 export default RelatedVideosCardList;

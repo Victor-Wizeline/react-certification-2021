@@ -1,12 +1,10 @@
 import SearchIcon from '@material-ui/icons/Search';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { IconButton } from '@material-ui/core';
 import { StyledInput, IconContainer, SearchContainer } from './Search.styled';
 
 const Search = ({ handleSearchChange }) => {
-  const history = useHistory();
   const [keyWord, setKeyWord] = useState('');
 
   const handleChange = (event) => {
@@ -14,8 +12,7 @@ const Search = ({ handleSearchChange }) => {
   };
 
   const triggerChange = () => {
-    if (!keyWord) history.push('/');
-    else handleSearchChange(keyWord);
+    if (keyWord) handleSearchChange(keyWord);
   };
 
   const handleKeyDown = (event) => {
@@ -44,8 +41,8 @@ const Search = ({ handleSearchChange }) => {
             color="error"
             onClick={() => {
               setKeyWord('');
-              history.push('/');
-              handleSearchChange('Wizeline');
+              // history.push('/');
+              // handleSearchChange('Wizeline');
             }}
           />
         </IconButton>

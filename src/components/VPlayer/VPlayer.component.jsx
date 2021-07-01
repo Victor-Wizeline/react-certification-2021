@@ -9,15 +9,7 @@ import useYoutubeAPI from '../../hooks/useYoutubeAPI';
 import RelatedVideosCardList from '../RelatedVideosCardList';
 
 const VPlayer = ({ videoDetail, id }) => {
-  const { statistics, snippet } = videoDetail?.items
-    ? videoDetail?.items[0]
-    : { snippet: null };
-
-  // TODO:: statisctis
-  console.log(statistics);
-
-  // const { dislikeCount, likeCount, viewCount, favoriteCount } = statistics;
-
+  const { snippet } = videoDetail?.items ? videoDetail?.items[0] : { snippet: null };
   const relatedVideosURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&relatedToVideoId=${id}`;
   const [relatedVideosLoading, relatedVideos, errorRelatedVideos] = useYoutubeAPI(
     relatedVideosURL
@@ -43,7 +35,7 @@ const VPlayer = ({ videoDetail, id }) => {
         {relatedVideosLoading || errorRelatedVideos ? (
           <CircularProgress disableShrink />
         ) : (
-          <RelatedVideosCardList related={relatedVideos} />
+          <RelatedVideosCardList relatedVideos={relatedVideos} />
         )}
       </RelatedVideoListContainer>
     </VPlayerContainer>
