@@ -1,31 +1,29 @@
 import React, { useRef } from 'react';
 import './Home.styles.css';
 
-import videos from '../../mockData/youtube-videos-mock.json';
-import VideoCard from '../../components/VideoCard';
+import VideoCardList from '../../components/VideoCardList';
+import useYoutubeAPI from '../../hooks/useYoutubeAPI';
+import LoadingOverlay from '../../components/LoadingOverlay';
+import EmptyState from '../../components/VideoCardList/EmptyState';
 
-function HomePage() {
+const MAX_RESULTS = 25;
+
+function HomePage({ search }) {
   const sectionRef = useRef(null);
+  const request = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${MAX_RESULTS}&q=${search}`;
+
+  const [loading, videos, error] = useYoutubeAPI(request);
+
+  if (loading) return <LoadingOverlay />;
+  if (error && !loading) return <EmptyState />;
+
   return (
     <section className="homepage" ref={sectionRef}>
-      {videos.items.map((video, index) => {
-        console.log(index);
-        const { id, snippet } = video;
-        const { thumbnails, description, channelTitle, title, publishedAt } = snippet;
-        const img = thumbnails && thumbnails.high && thumbnails.high.url;
-        if (id && id.videoId)
-          return (
-            <VideoCard
-              id={id.videoId}
-              img={img}
-              title={title}
-              description={description}
-              channel={channelTitle}
-              publishedAt={publishedAt}
-            />
-          );
-        return null;
-      })}
+      {videos && videos.length !== 0 ? (
+        <VideoCardList collection={videos} />
+      ) : (
+        <EmptyState />
+      )}
     </section>
   );
 }

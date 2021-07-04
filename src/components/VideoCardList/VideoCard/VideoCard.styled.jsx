@@ -5,6 +5,9 @@ export const StyledCard = styled(Card)`
   width: 325px;
   margin: 0 15px 20px;
   position: relative;
+  &:hover {
+    box-shadow: -1px 10px 29px 0px rgba(0, 0, 0, 0.8);
+    cursor: pointer;
 `;
 
 export const CardImg = styled(CardMedia)`

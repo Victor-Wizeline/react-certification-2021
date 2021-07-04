@@ -22,6 +22,12 @@ export const RightContainer = styled.div`
   justify-content: right;
 `;
 
+export const LeftContainer = styled.div`
+  justify-content: left;
+  display: flex;
+  align-items: center;
+`;
+
 export const DarkModeIcon = styled(Brightness4Icon)`
   color: black;
 `;
