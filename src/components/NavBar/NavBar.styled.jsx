@@ -2,9 +2,11 @@ import styled from 'styled-components';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import HomeIcon from '@material-ui/icons/Home';
+import MenuIcon from '@material-ui/icons/Menu';
 
 export const StyledNavBar = styled.nav`
-  background-color: rgb(165, 42, 42);
+  background-color: ${(props) => props.theme.navBackground};
   box-shadow: 8px 2px 20px 0px rgba(0, 0, 0, 0.08);
   width: 100%;
   height: 48px;
@@ -29,7 +31,7 @@ export const LeftContainer = styled.div`
 `;
 
 export const DarkModeIcon = styled(Brightness4Icon)`
-  color: black;
+  color: white;
 `;
 
 export const LightModeIcon = styled(Brightness7Icon)`
@@ -37,5 +39,13 @@ export const LightModeIcon = styled(Brightness7Icon)`
 `;
 
 export const AccountIcon = styled(AccountCircleIcon)`
-  color: black;
+  color: ${(props) => props.theme.fontColor};
+`;
+
+export const CustomHomeIcon = styled(HomeIcon)`
+  color: ${(props) => props.theme.fontColor};
+`;
+
+export const CustomMenuIcon = styled(MenuIcon)`
+  color: ${(props) => props.theme.fontColor};
 `;

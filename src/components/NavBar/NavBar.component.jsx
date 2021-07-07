@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 
 import { IconButton } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/Home';
 import { useHistory } from 'react-router-dom';
 import {
   StyledNavBar,
@@ -11,10 +9,14 @@ import {
   AccountIcon,
   RightContainer,
   LeftContainer,
+  CustomHomeIcon,
+  CustomMenuIcon,
 } from './NavBar.styled';
 import Search from './Search/Search.component';
+import { useAppContext, themes } from '../../state/AppProvider';
 
 const NavBar = ({ handleSearchChange }) => {
+  const { state, dispatch } = useAppContext();
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [lightMode, setLightMode] = useState(false);
@@ -24,7 +26,12 @@ const NavBar = ({ handleSearchChange }) => {
   };
 
   const changeTheme = () => {
+    console.log(state.theme);
     setLightMode(!lightMode);
+    dispatch({
+      type: 'SET_THEME',
+      payload: lightMode ? themes.light : themes.dark,
+    });
   };
 
   if (open) console.log('test');
@@ -37,7 +44,7 @@ const NavBar = ({ handleSearchChange }) => {
         onClick={handleMenu}
         edge="start"
       >
-        <MenuIcon />
+        <CustomMenuIcon />
       </IconButton>
       <LeftContainer>
         <IconButton
@@ -47,7 +54,7 @@ const NavBar = ({ handleSearchChange }) => {
           }}
           aria-label="Go home"
         >
-          <HomeIcon />
+          <CustomHomeIcon />
         </IconButton>
         <Search handleSearchChange={handleSearchChange} />
       </LeftContainer>

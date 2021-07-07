@@ -5,16 +5,26 @@ import { Avatar, CardContent } from '@material-ui/core';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 import { CardImg, CardTitle, StyledCard, StyledCardHeader } from './VideoCard.styled';
+import { useAppContext } from '../../../state/AppProvider';
 
 function VideoCard({ id, img, title, description, channel, publishedAt }) {
   const history = useHistory();
+  const { state } = useAppContext();
 
   const goToVideo = async (videoId) => {
     history.push(`/video/${videoId}`);
   };
 
   return (
-    <StyledCard key={id} role="listitem" onClick={() => goToVideo(id)}>
+    <StyledCard
+      key={id}
+      role="listitem"
+      onClick={() => goToVideo(id)}
+      style={{
+        backgroundColor: state.theme.itemBackground,
+        color: state.theme.fontColor,
+      }}
+    >
       <CardImg image={img} />
       <CardContent>
         <CardTitle>{title}</CardTitle>

@@ -15,7 +15,7 @@ export const SearchContainer = styled.div`
   max-width: 264px;
   position: relative;
   border-radius: 6px;
-  background-color: rgb(220, 148, 148);
+  background-color: ${(props) => props.theme.hoverColor};
   border: 1px solid #050505;
   margin: 0 5px;
   display: inline-flex;
