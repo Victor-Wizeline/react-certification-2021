@@ -3,7 +3,7 @@ const GlobalReducer = (state, action) => {
     case 'SET_SEARCH_TERM':
       return {
         ...state,
-        searchTerm: action.payload,
+        search: action.payload,
       };
     case 'SET_THEME':
       return {

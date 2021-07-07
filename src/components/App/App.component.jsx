@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { ThemeProvider } from 'styled-components';
@@ -14,22 +14,17 @@ import VideoPlayer from '../../pages/VideoPlayer';
 import { useAppContext } from '../../state/AppProvider';
 
 function App() {
-  const [search, setSearch] = useState('Wizeline');
   const { state } = useAppContext();
-
-  const onSearch = (term) => {
-    setSearch(term);
-  };
 
   return (
     <ThemeProvider theme={state.theme}>
       <BrowserRouter>
         <AuthProvider>
           <Layout>
-            <NavBar handleSearchChange={onSearch} />
+            <NavBar />
             <Switch>
               <Route exact path="/">
-                <HomePage search={search} />
+                <HomePage />
               </Route>
               <Route exact path="/login">
                 <LoginPage />

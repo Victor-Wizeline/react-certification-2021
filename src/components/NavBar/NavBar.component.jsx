@@ -15,7 +15,7 @@ import {
 import Search from './Search/Search.component';
 import { useAppContext, themes } from '../../state/AppProvider';
 
-const NavBar = ({ handleSearchChange }) => {
+const NavBar = () => {
   const { state, dispatch } = useAppContext();
   const history = useHistory();
   const [open, setOpen] = useState(false);
@@ -56,7 +56,7 @@ const NavBar = ({ handleSearchChange }) => {
         >
           <CustomHomeIcon />
         </IconButton>
-        <Search handleSearchChange={handleSearchChange} />
+        <Search />
       </LeftContainer>
       <RightContainer>
         <IconButton onClick={changeTheme} selected={lightMode} aria-label="Change theme">

@@ -30,7 +30,7 @@ const getDefaultTheme = () => {
 
 const initialState = {
   theme: getDefaultTheme(),
-  searchTerm: '',
+  search: 'Wizeline',
   error: null,
 };
 
