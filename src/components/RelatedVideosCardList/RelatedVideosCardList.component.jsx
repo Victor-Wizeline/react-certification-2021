@@ -1,7 +1,7 @@
 import React from 'react';
 import RelatedVideoCard from './RelatedVideoCard';
 
-const RelatedVideosCardList = ({ relatedVideos }) => {
+const RelatedVideosCardList = ({ relatedVideos, fromFav }) => {
   const displayRelatedVideos = (rvideos) => {
     let cardVideos = [];
     if (rvideos) {
@@ -15,6 +15,7 @@ const RelatedVideosCardList = ({ relatedVideos }) => {
               description={snippet?.description}
               thumbnail={snippet?.thumbnails.medium.url}
               id={id.videoId}
+              fromFav={fromFav}
             />
           );
         });

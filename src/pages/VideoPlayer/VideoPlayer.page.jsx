@@ -8,7 +8,7 @@ import VPlayer from '../../components/VPlayer';
 function VideoPlayer() {
   const { id } = useParams();
   const videoDetailUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${id}`;
-  const [loadingDetail, videoDetail, errorDetail] = useYoutubeAPI(videoDetailUrl);
+  const [loadingDetail, videoDetail, errorDetail] = useYoutubeAPI(videoDetailUrl, false);
   if (loadingDetail || errorDetail) return <LoadingOverlay />;
   return <VPlayer videoDetail={videoDetail} id={id} />;
 }

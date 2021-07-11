@@ -7,12 +7,16 @@ import { useHistory } from 'react-router-dom';
 import { CardImg, CardTitle, StyledCard, StyledCardHeader } from './VideoCard.styled';
 import { useAppContext } from '../../../state/AppProvider';
 
-function VideoCard({ id, img, title, description, channel, publishedAt }) {
+function VideoCard({ id, img, title, description, channel, publishedAt, fromFav }) {
   const history = useHistory();
   const { state } = useAppContext();
 
   const goToVideo = async (videoId) => {
-    history.push(`/video/${videoId}`);
+    if (fromFav) {
+      history.push(`/favorites/${videoId}`);
+    } else {
+      history.push(`/video/${videoId}`);
+    }
   };
 
   return (

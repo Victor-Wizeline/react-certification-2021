@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, CircularProgress } from '@material-ui/core';
+import { useLocation } from 'react-router-dom';
 import {
   StyledFav,
   RelatedVideoListContainer,
@@ -16,6 +17,9 @@ const VPlayer = ({ videoDetail, id }) => {
   const { authenticated } = state;
   const [isFavorite, setFavorite] = useState(false);
 
+  const { pathname } = useLocation();
+  const favPage = pathname.split('/')[1] === 'favorites';
+
   useEffect(() => {
     setFavorite(checkIfFavorite(id));
   }, [isFavorite, id]);
@@ -25,7 +29,8 @@ const VPlayer = ({ videoDetail, id }) => {
     : { snippet: null, kind: null };
   const relatedVideosURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&relatedToVideoId=${id}`;
   const [relatedVideosLoading, relatedVideos, errorRelatedVideos] = useYoutubeAPI(
-    relatedVideosURL
+    relatedVideosURL,
+    favPage
   );
 
   const handleFavorite = () => {
@@ -34,6 +39,7 @@ const VPlayer = ({ videoDetail, id }) => {
         removeFromFavorites(id);
       } else {
         const video = {
+          fromFav: true,
           etag,
           id: {
             kind,
@@ -76,7 +82,7 @@ const VPlayer = ({ videoDetail, id }) => {
         {relatedVideosLoading || errorRelatedVideos ? (
           <CircularProgress disableShrink />
         ) : (
-          <RelatedVideosCardList relatedVideos={relatedVideos} />
+          <RelatedVideosCardList relatedVideos={relatedVideos} fromFav={favPage} />
         )}
       </RelatedVideoListContainer>
     </VPlayerContainer>

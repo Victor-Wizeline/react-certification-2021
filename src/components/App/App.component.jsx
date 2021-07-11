@@ -30,7 +30,7 @@ function App() {
               <PrivateFavoriteVideosPage />
             </Private>
             <Private exact path="/favorites/:id">
-              <PrivateFavoriteVideosPage />
+              <VideoPlayer />
             </Private>
             <Route path="*">
               <NotFound />

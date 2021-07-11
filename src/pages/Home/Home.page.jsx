@@ -14,7 +14,7 @@ function HomePage() {
   const sectionRef = useRef(null);
   const request = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${MAX_RESULTS}&q=${state.search}`;
 
-  const [loading, videos, error] = useYoutubeAPI(request);
+  const [loading, videos, error] = useYoutubeAPI(request, false);
 
   if (loading) return <LoadingOverlay />;
   if (error && !loading) return <EmptyState />;

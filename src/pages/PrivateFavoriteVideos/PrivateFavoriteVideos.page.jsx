@@ -6,7 +6,7 @@ function PrivateFavoriteVideosPage() {
   const sectionRef = useRef(null);
   const videos = storage.get('favorites') || [];
   return (
-    <section className="favs" ref={sectionRef}>
+    <section className="homepage" ref={sectionRef}>
       <VideoCardList collection={videos} />
     </section>
   );

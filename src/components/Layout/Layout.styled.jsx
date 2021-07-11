@@ -6,5 +6,4 @@ export const Container = styled.div`
   margin-top: 48px;
   padding: 20px 40px;
   background-color: ${(props) => props.theme.hoverColor};
-  height: 100vh;
 `;

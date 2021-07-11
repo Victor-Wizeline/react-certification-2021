@@ -8,20 +8,23 @@ const VideoCardList = (props) => {
     let cardVideos = [];
     if (items) {
       cardVideos = items.map((video) => {
-        const { id, snippet } = video;
-        const { thumbnails, description, channelTitle, title, publishedAt } = snippet;
-        const img = thumbnails && thumbnails.high && thumbnails.high.url;
-        return (
-          <VideoCard
-            key={video.etag}
-            id={id.videoId}
-            img={img}
-            title={title}
-            description={description}
-            channel={channelTitle}
-            publishedAt={publishedAt}
-          />
-        );
+        const { id, snippet, fromFav } = video;
+        if (snippet) {
+          const { thumbnails, description, channelTitle, title, publishedAt } = snippet;
+          const img = thumbnails && thumbnails.high && thumbnails.high.url;
+          return (
+            <VideoCard
+              key={video.etag}
+              id={id.videoId}
+              img={img}
+              title={title}
+              description={description}
+              channel={channelTitle}
+              publishedAt={publishedAt}
+              fromFav={fromFav}
+            />
+          );
+        }
       });
     }
     return cardVideos;
@@ -29,7 +32,11 @@ const VideoCardList = (props) => {
 
   return (
     <VideoCardListStyled role="list">
-      {displayVideos(props.collection)}
+      {props.collection?.length > 0 ? (
+        displayVideos(props.collection)
+      ) : (
+        <h2>No videos were found</h2>
+      )}
     </VideoCardListStyled>
   );
 };

@@ -9,11 +9,15 @@ import {
   Content,
 } from './RelatedVideoCard.styled';
 
-const RelatedVideoCard = ({ title, description, thumbnail, id }) => {
+const RelatedVideoCard = ({ title, description, thumbnail, id, fromFav }) => {
   const history = useHistory();
 
   const goVideo = async (videoId) => {
-    history.push(`/video/${videoId}`);
+    if (fromFav) {
+      history.push(`/favorites/${videoId}`);
+    } else {
+      history.push(`/video/${videoId}`);
+    }
   };
   return (
     <Card data-testid={id} onClick={() => goVideo(id)}>
