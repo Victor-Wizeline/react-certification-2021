@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import reducer from './GlobalReducer';
+import { storage } from '../utils/storage';
 
 export const themes = {
   dark: {
@@ -30,10 +31,14 @@ const getDefaultTheme = () => {
   return theme;
 };
 
-const initialState = {
-  theme: getDefaultTheme(),
-  search: 'Wizeline',
-  error: null,
+const getInitialState = () => {
+  const sessionData = storage.get('sessionData') || {};
+  return {
+    theme: getDefaultTheme(),
+    search: 'Wizeline',
+    authenticated: Object.keys(sessionData).length > 0,
+    error: null,
+  };
 };
 
 const AppContext = createContext();
@@ -47,6 +52,7 @@ function useAppContext() {
 }
 
 function AppProvider({ children }) {
+  const initialState = getInitialState();
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (

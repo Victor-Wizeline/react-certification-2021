@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { IconButton } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import {
+  StyledAvatar,
   StyledNavBar,
   LightModeIcon,
   DarkModeIcon,
@@ -16,9 +17,11 @@ import Search from './Search/Search.component';
 import { useAppContext, themes } from '../../state/AppProvider';
 import SideBar from './SideBar';
 import LoginModal from '../LoginModal';
+import { storage } from '../../utils/storage';
 
 const NavBar = () => {
   const { state, dispatch } = useAppContext();
+  const { authenticated } = state;
   const history = useHistory();
   const [sideBarState, setSideBarState] = useState(false);
   const [lightMode, setLightMode] = useState(false);
@@ -72,16 +75,22 @@ const NavBar = () => {
           {!lightMode ? <LightModeIcon /> : <DarkModeIcon />}
         </IconButton>
 
-        <IconButton
-          color="inherit"
-          aria-label="Log In"
-          onClick={() => {
-            setOpen(!open);
-          }}
-          edge="start"
-        >
-          <AccountIcon />
-        </IconButton>
+        {!authenticated ? (
+          <IconButton
+            color="inherit"
+            aria-label="Log In"
+            onClick={() => {
+              setOpen(!open);
+            }}
+            edge="start"
+          >
+            <AccountIcon />
+          </IconButton>
+        ) : (
+          <IconButton color="inherit" aria-label="Log Out" edge="start">
+            <StyledAvatar src={storage.get('sessionData').avatarUrl} />
+          </IconButton>
+        )}
       </RightContainer>
       <SideBar open={sideBarState} onClose={closeSideBar} />
       <LoginModal isOpen={open} onClose={closeLoginModal} />

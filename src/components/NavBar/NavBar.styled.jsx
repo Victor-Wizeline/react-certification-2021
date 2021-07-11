@@ -4,6 +4,7 @@ import Brightness7Icon from '@material-ui/icons/Brightness7';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HomeIcon from '@material-ui/icons/Home';
 import MenuIcon from '@material-ui/icons/Menu';
+import Avatar from '@material-ui/core/Avatar';
 
 export const StyledNavBar = styled.nav`
   background-color: ${(props) => props.theme.navBackground};
@@ -48,4 +49,9 @@ export const CustomHomeIcon = styled(HomeIcon)`
 
 export const CustomMenuIcon = styled(MenuIcon)`
   color: ${(props) => props.theme.fontColor};
+`;
+
+export const StyledAvatar = styled(Avatar)`
+  height: 30px;
+  width: 30px;
 `;

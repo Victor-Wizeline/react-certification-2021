@@ -28,11 +28,11 @@ const LoginModal = ({ isOpen, onClose }) => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    if (username.trim() === 'wizeline' && password.trim() === 'Rocks!') {
+    if (username.trim().toLowerCase() === 'wizeline' && password.trim() === 'Rocks!') {
       try {
         login(username.trim(), password.trim()).then((data) => {
           dispatch({
-            type: 'LOG_IN',
+            type: 'SET_AUTH_USER',
             payload: data,
           });
         });
@@ -41,7 +41,7 @@ const LoginModal = ({ isOpen, onClose }) => {
       }
       onClose();
     } else {
-      setError('The email or the password are incorrect');
+      setError('The username or the password are incorrect');
     }
   };
 
@@ -53,13 +53,13 @@ const LoginModal = ({ isOpen, onClose }) => {
         <LoginForm onSubmit={handleLogin}>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           <label htmlFor="username">
-            Email:
+            Username:
             <br />
             <Input
               id="username"
               name="username"
               type="text"
-              placeholder="youremail@email.com"
+              placeholder="username"
               onChange={handleUsernameChange}
               value={username}
               required

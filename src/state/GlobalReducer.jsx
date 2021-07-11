@@ -1,3 +1,5 @@
+import { storage } from '../utils/storage';
+
 const GlobalReducer = (state, action) => {
   switch (action.type) {
     case 'SET_SEARCH_TERM':
@@ -15,6 +17,24 @@ const GlobalReducer = (state, action) => {
         ...state,
         error: action.payload,
       };
+    case 'SET_AUTH_USER': {
+      const sessionData = action.payload;
+      storage.set('sessionData', sessionData);
+      return {
+        ...state,
+        authenticated: true,
+        sessionData,
+      };
+    }
+    case 'SET_DEAUTH_USER': {
+      const sessionData = {};
+      storage.set('sessionData', sessionData);
+      return {
+        ...state,
+        authenticated: false,
+        sessionData,
+      };
+    }
     default:
       return state;
   }

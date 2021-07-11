@@ -1,11 +1,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useAuth } from '../../../providers/Auth';
 import { SideDrawerStyled } from './SideBar.styled';
 import BlurEffect from '../../Effects';
+import { useAppContext } from '../../../state/AppProvider';
 
 const SideBar = (props) => {
-  const { authenticated } = useAuth();
+  const { state, dispatch } = useAppContext();
+  const { authenticated } = state;
+
+  const logout = () => {
+    dispatch({ type: 'SET_DEAUTH_USER' });
+  };
 
   return (
     <>
@@ -33,7 +38,7 @@ const SideBar = (props) => {
             )}
             {authenticated ? (
               <li>
-                <NavLink to="/" onClick={() => {}} onKeyDown={() => {}}>
+                <NavLink to="/" onClick={logout}>
                   Logout
                 </NavLink>
               </li>
