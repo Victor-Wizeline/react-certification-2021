@@ -29,11 +29,7 @@ const VideoCardList = (props) => {
 
   return (
     <VideoCardListStyled role="list">
-      {props.collection.items.length > 0 ? (
-        displayVideos(props.collection.items)
-      ) : (
-        <h2>No videos were found</h2>
-      )}
+      {displayVideos(props.collection)}
     </VideoCardListStyled>
   );
 };

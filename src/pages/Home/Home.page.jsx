@@ -7,7 +7,7 @@ import LoadingOverlay from '../../components/LoadingOverlay';
 import EmptyState from '../../components/VideoCardList/EmptyState';
 import { useAppContext } from '../../state/AppProvider';
 
-const MAX_RESULTS = 25;
+const MAX_RESULTS = 10;
 
 function HomePage() {
   const { state } = useAppContext();
@@ -21,8 +21,8 @@ function HomePage() {
 
   return (
     <section className="homepage" ref={sectionRef}>
-      {videos && videos.length !== 0 ? (
-        <VideoCardList collection={videos} />
+      {videos && videos.length !== 0 && videos?.items?.length !== 0 ? (
+        <VideoCardList collection={videos.items} />
       ) : (
         <EmptyState />
       )}

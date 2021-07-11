@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { useAuth } from '../../providers/Auth';
+import { useAppContext } from '../../state/AppProvider';
 
 function Private({ children, ...rest }) {
-  const { authenticated } = useAuth();
+  const { state } = useAppContext();
+  const { authenticated } = state;
 
   return (
     <Route {...rest} render={() => (authenticated ? children : <Redirect to="/" />)} />

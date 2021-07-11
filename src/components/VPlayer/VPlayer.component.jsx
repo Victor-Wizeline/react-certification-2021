@@ -1,19 +1,54 @@
-import React from 'react';
-import { CircularProgress } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Button, CircularProgress } from '@material-ui/core';
 import {
+  StyledFav,
   RelatedVideoListContainer,
   VideoLayout,
   VPlayerContainer,
 } from './VPlayer.styled';
 import useYoutubeAPI from '../../hooks/useYoutubeAPI';
 import RelatedVideosCardList from '../RelatedVideosCardList';
+import { useAppContext } from '../../state/AppProvider';
+import { removeFromFavorites, addToFavorites, checkIfFavorite } from '../../utils/fns';
 
 const VPlayer = ({ videoDetail, id }) => {
-  const { snippet } = videoDetail?.items ? videoDetail?.items[0] : { snippet: null };
+  const { state } = useAppContext();
+  const { authenticated } = state;
+  const [isFavorite, setFavorite] = useState(false);
+
+  useEffect(() => {
+    setFavorite(checkIfFavorite(id));
+  }, [isFavorite, id]);
+
+  const { snippet, kind, etag } = videoDetail?.items
+    ? videoDetail?.items[0]
+    : { snippet: null, kind: null };
   const relatedVideosURL = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&relatedToVideoId=${id}`;
   const [relatedVideosLoading, relatedVideos, errorRelatedVideos] = useYoutubeAPI(
     relatedVideosURL
   );
+
+  const handleFavorite = () => {
+    try {
+      if (isFavorite) {
+        removeFromFavorites(id);
+      } else {
+        const video = {
+          etag,
+          id: {
+            kind,
+            videoId: id,
+          },
+          snippet,
+        };
+        addToFavorites(video);
+      }
+
+      setFavorite(!isFavorite);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <VPlayerContainer>
@@ -26,6 +61,12 @@ const VPlayer = ({ videoDetail, id }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
+        {authenticated && (
+          <Button onClick={handleFavorite}>
+            {isFavorite ? 'Remove From ' : 'Add to '} favorites
+            <StyledFav />
+          </Button>
+        )}
         <h1>{snippet?.title}</h1>
         <small style={{ whiteSpace: 'pre-wrap', padding: '15px' }}>
           {snippet?.description}

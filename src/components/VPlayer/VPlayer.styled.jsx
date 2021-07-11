@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 export const VPlayerContainer = styled.div`
   display: flex;
@@ -17,4 +18,8 @@ export const RelatedVideoListContainer = styled.div`
   justify-content: center;
   width: 40%;
   padding: 0px 48px;
+`;
+
+export const StyledFav = styled(FavoriteIcon)`
+  color: red;
 `;

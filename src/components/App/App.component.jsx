@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import HomePage from '../../pages/Home';
 import NotFound from '../../pages/NotFound';
-import SecretPage from '../../pages/Secret';
+import PrivateFavoriteVideosPage from '../../pages/PrivateFavoriteVideos';
 import Private from '../Private';
 import Layout from '../Layout';
 import NavBar from '../NavBar';
@@ -27,10 +27,10 @@ function App() {
               <VideoPlayer />
             </Route>
             <Private exact path="/favorites">
-              <SecretPage />
+              <PrivateFavoriteVideosPage />
             </Private>
             <Private exact path="/favorites/:id">
-              <SecretPage />
+              <PrivateFavoriteVideosPage />
             </Private>
             <Route path="*">
               <NotFound />
