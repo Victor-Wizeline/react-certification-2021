@@ -14,15 +14,26 @@ import {
 } from './NavBar.styled';
 import Search from './Search/Search.component';
 import { useAppContext, themes } from '../../state/AppProvider';
+import SideBar from './SideBar';
+import LoginModal from '../LoginModal';
 
 const NavBar = () => {
   const { state, dispatch } = useAppContext();
   const history = useHistory();
-  const [open, setOpen] = useState(false);
+  const [sideBarState, setSideBarState] = useState(false);
   const [lightMode, setLightMode] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const handleMenu = () => {
-    setOpen(true);
+  const changeSideBarState = () => {
+    setSideBarState(!sideBarState);
+  };
+
+  const closeSideBar = () => {
+    setSideBarState(false);
+  };
+
+  const closeLoginModal = () => {
+    setOpen(false);
   };
 
   const changeTheme = () => {
@@ -34,14 +45,12 @@ const NavBar = () => {
     });
   };
 
-  if (open) console.log('test');
-
   return (
     <StyledNavBar>
       <IconButton
         color="inherit"
         aria-label="Open Menu"
-        onClick={handleMenu}
+        onClick={changeSideBarState}
         edge="start"
       >
         <CustomMenuIcon />
@@ -63,10 +72,19 @@ const NavBar = () => {
           {!lightMode ? <LightModeIcon /> : <DarkModeIcon />}
         </IconButton>
 
-        <IconButton color="inherit" aria-label="Log In" onClick={() => {}} edge="start">
+        <IconButton
+          color="inherit"
+          aria-label="Log In"
+          onClick={() => {
+            setOpen(!open);
+          }}
+          edge="start"
+        >
           <AccountIcon />
         </IconButton>
       </RightContainer>
+      <SideBar open={sideBarState} onClose={closeSideBar} />
+      <LoginModal isOpen={open} onClose={closeLoginModal} />
     </StyledNavBar>
   );
 };

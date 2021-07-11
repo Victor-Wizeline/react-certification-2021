@@ -4,6 +4,7 @@ import reducer from './GlobalReducer';
 export const themes = {
   dark: {
     navBackground: '#2f2f2f',
+    sideBarBgColor: '#9a9a9a',
     bodyBackground: '#313131',
     itemBackground: '#525252',
     fontColor: 'white',
@@ -12,6 +13,7 @@ export const themes = {
   },
   light: {
     navBackground: '#A52A2AFF',
+    sideBarBgColor: '#ffffff',
     bodyBackground: '#ebe1e1',
     itemBackground: '#fefefe',
     fontColor: 'black',

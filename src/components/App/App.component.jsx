@@ -17,9 +17,9 @@ function App() {
   const { state } = useAppContext();
 
   return (
-    <ThemeProvider theme={state.theme}>
-      <BrowserRouter>
-        <AuthProvider>
+    <AuthProvider>
+      <ThemeProvider theme={state.theme}>
+        <BrowserRouter>
           <Layout>
             <NavBar />
             <Switch>
@@ -32,7 +32,10 @@ function App() {
               <Route exact path="/video/:id">
                 <VideoPlayer />
               </Route>
-              <Private exact path="/secret">
+              <Private exact path="/favorites">
+                <SecretPage />
+              </Private>
+              <Private exact path="/favorites/:id">
                 <SecretPage />
               </Private>
               <Route path="*">
@@ -40,9 +43,9 @@ function App() {
               </Route>
             </Switch>
           </Layout>
-        </AuthProvider>
-      </BrowserRouter>
-    </ThemeProvider>
+        </BrowserRouter>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }
 
